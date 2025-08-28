@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import ProductList from "@/components/ProductList";
 import ProductCard from "@/components/MtfProductCard";
 import { products } from '@/lib/products';
-import { hasRole } from '@/utils/auth'
+
 import { useUser } from '@clerk/nextjs';
 import { redirect } from 'next/navigation'
 import { userAgent } from "next/server";
@@ -19,12 +19,6 @@ const dummyProduct = {
 };
 
 export default async function Home() {
-   const { user } = useUser();
-  const isManufacturer = hasRole(user, "manufacturer");
-  if(!isManufacturer){
-    redirect("/")
-  }
-
   return (
     <div className="font-sans flex flex-col">
       <header className="border-b-2 border-b-gray-300">

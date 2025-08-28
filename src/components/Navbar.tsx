@@ -8,7 +8,11 @@ import {
   MoveRight,
 } from "lucide-react";
 
-export default function UserNav() {
+type NavbarProps = {
+  userRole: 'manufacturer' | 'distributor' | 'other'; // Add userRole prop
+};
+
+export default function UserNav({userRole}: NavbarProps) {
   const router = useRouter();
   const handleAddProduct = () => {
   router.push('/addproductpage');
@@ -20,10 +24,22 @@ export default function UserNav() {
               SupChain
             </Link>
             <Link href="/addproductpage">
-              <Button className="bg-teal-600 hover:bg-teal-700 text-white" onClick={handleAddProduct}>
-                <Plus className="w-4 h-4 mr-2" />
-                Add Product
-              </Button>
+            {(userRole === 'manufacturer') && (
+          <Link href="/addproductpage">
+            <Button className="bg-teal-600 hover:bg-teal-700 text-white" onClick={handleAddProduct}>
+              <Plus className="w-4 h-4 mr-2" />
+              Add Product
+            </Button>
+          </Link>
+        )}
+         {(userRole === 'distributor') && (
+          <Link href="/addproductpage">
+            <Button className="bg-blue-700 hover:bg-blue-900 text-white" onClick={handleAddProduct}>
+              <Plus className="w-4 h-4 mr-2" />
+              ReInventory
+            </Button>
+          </Link>
+        )}
             </Link>
           </div>
           <div className="flex items-center gap-4">
