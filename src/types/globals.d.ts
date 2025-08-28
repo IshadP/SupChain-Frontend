@@ -6,6 +6,7 @@ export type Roles = 'admin' | 'manufacturer' | 'distributor' | 'retailer' | 'mem
 declare global {
   interface CustomJwtSessionClaims {
     metadata: {
+      onboardingComplete?: boolean
       role?: Roles
     }
   }
