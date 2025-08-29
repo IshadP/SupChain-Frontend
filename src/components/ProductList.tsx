@@ -11,18 +11,20 @@ type ProductListProps = {
 const ProductList: React.FC<ProductListProps> = ({ products, userRole }) => {
   return (
     <div className="product-list mt-[2rem]">
-      <div>
+      <div className='font-semibold text-4xl mb-4'>
         <h2>Products</h2>
       </div>
+      <div className='flex flex-col gap-5'>
       {products.map((product) => {
         if (userRole === 'manufacturer') {
-          return <MtfProductCard key={product.id} product={product} />;
+          return <MtfProductCard key={product.id} product={product}/>;
         } else if (userRole === 'distributor') {
           return <DisProductCard key={product.id} product={product} />;
         } else {
           return null; // Or a default card if the role is unknown
         }
       })}
+      </div>
     </div>
   );
 };

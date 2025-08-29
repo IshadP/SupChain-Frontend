@@ -18,13 +18,13 @@ type ProductCardProps = {
 
 export default function ProductCard({ product }: ProductCardProps) {
     return(
-        <div className="flex items-center gap-4">
-                  <div className="w-20 h-20 bg-gray-200 rounded-lg flex-shrink-0">
-                    {/* <img
+        <div className="flex items-center gap-4 border-2 border-gray-400 rounded-lg p-4">
+                  <div className="w-32 h-32 bg-white rounded-lg flex-shrink-0">
+                    <img
                       src={product.image || "/placeholder.svg"}
                       alt={product.name}
-                      className="w-full h-full object-cover rounded-lg"
-                    /> */}
+                      className="w-full h-full object-contain rounded-lg"
+                    />
                   </div>
 
                   <div className="flex-1">
