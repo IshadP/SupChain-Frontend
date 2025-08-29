@@ -24,7 +24,21 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
   }
 
   // If the user is logged in and the route is protected, let them view.
-  if (userId && !isPublicRoute(req)) return NextResponse.next()
+  if (userId && !isPublicRoute(req)) {
+    const role = sessionClaims?.metadata?.role
+    let redirectUrl = '/'
+    if (role === 'manufacturer') redirectUrl = '/manufacturer'
+    else if (role === 'distributor') redirectUrl = '/distributor'
+    else if (role === 'retailer') redirectUrl = '/retailer'
+    else if (role === 'admin') redirectUrl = '/admin'
+    // Add more roles as needed
+
+    // Only redirect if not already on that page
+    if (!req.nextUrl.pathname.startsWith(redirectUrl)) {
+      return NextResponse.redirect(new URL(redirectUrl, req.url))
+    }
+    return NextResponse.next()
+  }
 })
 
 export const config = {

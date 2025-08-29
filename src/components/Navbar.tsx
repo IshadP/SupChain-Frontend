@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link"
+import { SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import { useRouter } from 'next/navigation';
 import {
   Plus,
@@ -43,13 +44,17 @@ export default function UserNav({userRole}: NavbarProps) {
             </Link>
           </div>
           <div className="flex items-center gap-4">
-            <Button variant="ghost" className="text-sm">
-              Profile
-              <MoveRight className="w-4 h-4 mr-2" />
-            </Button>
-            <Button variant="default" className="bg-red-600 text-white text-sm">
-              Log Out
-            </Button>
+             <SignedOut>
+              <SignInButton />
+              <SignUpButton>
+                <button className="bg-[#6c47ff] text-ceramic-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
+                  Sign Up
+                </button>
+              </SignUpButton>
+            </SignedOut>
+            <SignInButton>
+              <UserButton/>
+            </SignInButton>
           </div>
         </div>
     )
